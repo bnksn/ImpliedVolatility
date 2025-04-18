@@ -1,0 +1,13 @@
+form input[type="text"] {
+    padding: 4px;
+    font-size: 16px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  
+  form button {
+    padding: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

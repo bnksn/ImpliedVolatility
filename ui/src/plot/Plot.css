@@ -1,0 +1,10 @@
+.plot-dropdown {
+    margin: 4px;
+  }
+  
+.plot-container {
+  margin: 6px;
+  padding: 6px;
+  width: 90vw;
+  height: 40vw;
+}
