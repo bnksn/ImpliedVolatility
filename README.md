@@ -8,7 +8,7 @@
 pip install flask flask_cors yfinance scipy
 ```
 
-# Launching the Back End server
+# Launching the backend server
 
 1.  Open a new terminal or command prompt.
 2.  Navigate to the directory containing your `main.py` file.
@@ -18,7 +18,7 @@ pip install flask flask_cors yfinance scipy
     python3 main.py
     ```
 
-# Launching the Front End server
+# Launching the frontend server
 
 1.  Navigate to the downloaded `ui` directory:
     ```bash
