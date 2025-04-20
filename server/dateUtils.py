@@ -1,5 +1,5 @@
 from datetime import datetime
-import constants
+import server.constants as constants
 
 
 def convertMaturityToDays(maturity: str) -> int:

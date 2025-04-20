@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # type: ignore
-from marketData import getVolSurface, isValidTicker
-from volCache import VolCache
+from server.marketData import getVolSurface, isValidTicker
+from server.volCache import VolCache
 import logging
-import constants
+import server.constants as constants
 
 app = Flask(__name__)
 CORS(app)

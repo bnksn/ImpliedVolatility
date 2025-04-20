@@ -1,9 +1,9 @@
 import numpy as np
 import scipy.interpolate  # type: ignore
-import constants
+import server.constants as constants
 
 
-def buildInterpolationGrid(strikes1d: list[float], daysUntilMaturity1d: list[int]) -> tuple[list[float], list[int]]:
+def buildInterpolationAxes(strikes1d: list[float], daysUntilMaturity1d: list[int]) -> tuple[list[float], list[int]]:
     strikeAxis = [float(s) for s in np.linspace(min(strikes1d), max(strikes1d), constants.numGridAxisPoints)]
     daysUntilMaturityAxis = [
         int(d) for d in np.linspace(min(daysUntilMaturity1d), max(daysUntilMaturity1d), constants.numGridAxisPoints)

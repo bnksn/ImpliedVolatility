@@ -1,10 +1,10 @@
 import yfinance as yf  # type: ignore
-from volSurface import VolSurface
+from server.volSurface import VolSurface
 import numpy as np
 import logging
-import constants
-from dateUtils import convertMaturityToDays
-from volSurfaceUtils import buildInterpolationGrid, interpolateVolatility
+import server.constants as constants
+from server.dateUtils import convertMaturityToDays
+from server.volSurfaceUtils import buildInterpolationAxes, interpolateVolatility
 
 logger = logging.getLogger(__name__)
 
@@ -14,8 +14,7 @@ def getSlices(stock: yf.Ticker) -> dict[int, list[tuple[float, float]]]:
 
     for maturity in stock.options:
         asDays = convertMaturityToDays(maturity)
-        optionChain = stock.option_chain(maturity)
-        for _, call in optionChain.calls.iterrows():
+        for _, call in stock.option_chain(maturity).calls.iterrows():
             strike = call[constants.yfinanceStrikeKey]
             impliedVolatility = call[constants.yfinanceImpliedVolatilityKey]
             slices.setdefault(asDays, []).append((strike, impliedVolatility))
@@ -39,7 +38,7 @@ def getVolSurface(ticker: str) -> VolSurface:
             vols1d.append(vol)
 
     # Build x and y axes for the 2D interpolation grid
-    strikeAxis, daysToMaturityAxis = buildInterpolationGrid(strikes1d, daysUntilMaturity1d)
+    strikeAxis, daysToMaturityAxis = buildInterpolationAxes(strikes1d, daysUntilMaturity1d)
     strikeMaturityPoints = np.array(
         [strikes1d, daysUntilMaturity1d]
     ).T  # Each row is a point [strike, maturity] in the grid
