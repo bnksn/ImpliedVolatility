@@ -15,7 +15,7 @@ def buildInterpolationAxes(strikes1d: list[float], daysUntilMaturity1d: list[int
 def interpolateVolatility(
     strikeAxis: list[float],
     daysUntilMaturityAxis: list[int],
-    strikeMaturityPoints: np.ndarray,  # 2d array of shape (num points, 2)
+    strikeMaturityPoints: np.typing.NDArray[np.float64],  # 2d array of shape (num points, 2)
     vols1d: list[float],  # 1d array of shape (num points,)
 ) -> list[list[float]]:
     vols2d = scipy.interpolate.griddata(

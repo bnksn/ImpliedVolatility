@@ -1,4 +1,4 @@
-name: pytest
+name: Python validate
 
 on: push
 
@@ -20,7 +20,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install freezegun pytest flask flask_cors yfinance scipy
+        python -m pip install freezegun pytest flask flask_cors yfinance scipy mypy
     - name: Test with pytest
+      run: pytest
+    - name: mypy type check
       run: |
-        pytest
+        mypy --install-types --non-interactive .
+        mypy --strict .

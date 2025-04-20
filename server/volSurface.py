@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class VolSurface:
     def __init__(
         self,
@@ -17,7 +20,7 @@ class VolSurface:
         self.slices = slices
         self.ccy = ccy
 
-    def toDict(self) -> dict:
+    def toDict(self) -> dict[str, Any]:
         return {
             "ticker": self.ticker,
             "strikeAxis": self.strikeAxis,

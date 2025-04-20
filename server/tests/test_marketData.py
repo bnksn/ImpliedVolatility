@@ -1,13 +1,13 @@
 import pytest
 from unittest import mock
 from freezegun import freeze_time
-import yfinance as yf
+import yfinance as yf  # type: ignore
 import server.constants as constants
 from server.marketData import getSlices, isValidTicker
 
 
 @pytest.fixture
-def mock_ticker():
+def mock_ticker() -> mock.MagicMock:
     mock_ticker = mock.MagicMock(spec=yf.Ticker)
     mock_ticker.options = ["2025-05-15", "2025-06-19"]
 
@@ -26,7 +26,7 @@ def mock_ticker():
 
 
 @freeze_time("2025-05-01")
-def test_getSlices(mock_ticker):
+def test_getSlices(mock_ticker: mock.MagicMock) -> None:
     slices = getSlices(mock_ticker)
 
     assert 14 in slices
@@ -35,7 +35,7 @@ def test_getSlices(mock_ticker):
     assert len(slices[49]) == 2
 
 
-def test_isValidTicker_valid(monkeypatch):
+def test_isValidTicker_valid(monkeypatch: pytest.MonkeyPatch) -> None:
     mock_ticker = mock.MagicMock(spec=yf.Ticker)
     mock_ticker.info = {"symbol": "AAPL", "shortName": "Apple Inc", constants.yfinanceCurrencyKey: "USD"}
     mock_ticker.history.return_value.empty = False
@@ -43,13 +43,13 @@ def test_isValidTicker_valid(monkeypatch):
     assert isValidTicker("AAPL")
 
 
-def test_isValidTicker_invalid(monkeypatch):
+def test_isValidTicker_invalid(monkeypatch: pytest.MonkeyPatch) -> None:
     mock_ticker = mock.MagicMock(spec=yf.Ticker)
     mock_ticker.info = {"symbol": None, "shortName": "Apple Inc", constants.yfinanceCurrencyKey: "USD"}
     monkeypatch.setattr(yf, "Ticker", mock.MagicMock(return_value=mock_ticker))
     assert not isValidTicker("INVALID")
 
 
-def test_isValidTicker_exception(monkeypatch):
+def test_isValidTicker_exception(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(yf, "Ticker", mock.MagicMock(side_effect=Exception("API Error")))
     assert not isValidTicker("ERROR")
