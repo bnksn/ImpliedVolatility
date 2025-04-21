@@ -16,7 +16,7 @@ export default function Form(formProps: FormProps) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/getImpliedSurface?ticker=${ticker}`
+        `http://localhost:5000/getImpliedSurface?ticker=${ticker}`,
       );
       if (!response.ok) {
         const errorJson = await response.json(); // Parse the response JSON
@@ -32,16 +32,17 @@ export default function Form(formProps: FormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="form">
       <label>
         Ticker:
         <input
+          data-testid="ticker-input"
           type="text"
           value={ticker}
           onChange={(e) => setTicker(e.target.value)}
         />
       </label>
-      <button type="submit" disabled={isLoading}>
+      <button type="submit" disabled={isLoading} data-testid="ticker-button">
         {isLoading ? "Retrieving Surface" : "Get Surface"}
       </button>
     </form>

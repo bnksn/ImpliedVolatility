@@ -1,3 +1,9 @@
+import os
+import sys
+
+# This is a workaround to add the parent directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 from server.marketData import getVolSurface, isValidTicker

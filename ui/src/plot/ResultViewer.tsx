@@ -14,7 +14,7 @@ export default function ResultViewer(resultViewerProps: ResultViewerProps) {
   const [selectedPlot, setSelectedPlot] = useState(surfacePlot);
 
   return (
-    <>
+    <div data-testid="result-viewer">
       <div className="plot-dropdown">
         <PlotDropdown
           selectedPlot={selectedPlot}
@@ -36,6 +36,6 @@ export default function ResultViewer(resultViewerProps: ResultViewerProps) {
       {selectedPlot === slicePlot && (
         <SlicePlot volSurface={resultViewerProps.volSurface} />
       )}
-    </>
+    </div>
   );
 }

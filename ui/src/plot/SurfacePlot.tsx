@@ -10,7 +10,7 @@ interface SurfacePlotProps {
 
 export default function SurfacePlot(surfacePlotProps: SurfacePlotProps) {
   return (
-    <div className="plot-container">
+    <div className="plot-container" data-testid="surface-plot">
       <Plot
         data={[
           {

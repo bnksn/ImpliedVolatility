@@ -8,7 +8,7 @@ interface SlicePlotProps {
 
 export default function SlicePlot(slicePlotProps: SlicePlotProps) {
   return (
-    <div className="plot-container">
+    <div className="plot-container" data-testid="slice-plot">
       <Plot
         data={Object.entries(slicePlotProps.volSurface.slices).map(
           ([day, values]) => ({
@@ -17,7 +17,7 @@ export default function SlicePlot(slicePlotProps: SlicePlotProps) {
             type: "scatter",
             mode: "lines+markers",
             name: `${day} Days`,
-          })
+          }),
         )}
         layout={{
           title: {
